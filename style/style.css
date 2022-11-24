@@ -1,0 +1,48 @@
+.show-record-div{
+    background-color: aqua;
+    height: 100px;
+}
+
+.show-record-div{
+    height: 50vh;
+}
+
+.input-section{
+    width: 100vw;
+    height: 25vh;
+    margin-top: 10px;
+    /* background-color: rgb(98, 199, 199); */
+    display: flex;    
+    justify-content: space-around;
+}
+
+.input-div{
+    width: 45vw;
+    height: auto;
+    background-color: rgb(98, 199, 103);
+    display: flex;
+    flex-direction: column;
+}
+
+.name-div{
+    display: flex;
+    align-items: center;
+    height: 15px;
+    margin: 5px;
+}
+
+.name-div input{
+    width: 50%;
+}
+
+.input-div textarea{
+    width: auto;
+    height: auto;
+    margin: 5px;
+    resize:none;
+}
+
+.input-div p{
+    align-self: flex-end;
+    margin-right: 5px;
+}
