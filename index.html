@@ -8,6 +8,7 @@
     <title>Diaglog Note</title>
     <link rel="stylesheet" href="./style/normalize.css">
     <link rel="stylesheet" href="./style/style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
@@ -17,30 +18,32 @@
 
 
     <!-- 顯示已記錄對話 -->
-    <div class="show-record-div">
-
+    <div id="show-record-div">
+        <ul id="messages"></ul>
     </div>
 
     <!-- 切割線 -->
     <hr>
 
     <!-- 輸入欄位 -->
-    <div class="input-section">
+    <div id="input-section">
         <div class="input-div">
             <div class="name-div">
                 <h3>對話者：</h3>
-                <input type="text" class="name-input" value="A">
+                <input type="text" class="name-input" id="name-A" value="A">
             </div>
-            <textarea name="content-input-A" rows="6" cols="40" placeholder="請輸入內容..."></textarea>
-            <p>按 Enter 輸入</p>
+            <textarea id="textarea-A" rows="6" cols="40" placeholder="請輸入內容..."></textarea>
+            <!-- <p class="enter-tip">按 Enter 輸入</p> -->
+            <button type="button" id="enter-A">Enter</button>
         </div>
-        <div class="input-div">
+        <div class="input-div input-B">
             <div class="name-div">
                 <h3>對話者：</h3>
-                <input type="text" class="name-input" value="B">
+                <input type="text" class="name-input" id="name-B" value="B">
             </div>
-            <textarea name="content-input-B" rows="6" cols="40" placeholder="請輸入內容..."></textarea>
-            <p>按 Enter 輸入</p>
+            <textarea id="textarea-B" rows="6" cols="40" placeholder="請輸入內容..."></textarea>
+            <!-- <p class="enter-tip">按 Enter 輸入</p> -->
+            <button type="button" id="enter-B">Enter</button>
         </div>
     </div>
     

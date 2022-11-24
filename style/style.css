@@ -1,13 +1,39 @@
-.show-record-div{
-    background-color: aqua;
-    height: 100px;
-}
-
-.show-record-div{
+#show-record-div{
+    background-color: rgb(214, 214, 214);
     height: 50vh;
+    padding: 3px;
 }
 
-.input-section{
+#messages{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    
+}
+
+.msg-block{
+    width: fit-content;
+    height:fit-content;
+    margin: 5px;
+    padding: 3px;
+    border-radius: 7px;
+    list-style:none;
+    max-width:60%;
+    word-break: break-all;
+}
+
+.msg-block-A{
+    background-color: aliceblue;
+    align-self: flex-start;
+}
+
+.msg-block-B{
+    background-color: rgb(156, 221, 113);
+    align-self: flex-end;
+}
+
+#input-section{
     width: 100vw;
     height: 25vh;
     margin-top: 10px;
@@ -46,3 +72,4 @@
     align-self: flex-end;
     margin-right: 5px;
 }
+
