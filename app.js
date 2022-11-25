@@ -7,10 +7,6 @@ const textareas = [document.querySelector('#textarea-A'), document.querySelector
 // 現在輸入者的Index
 var indexNow = 1
 
-function goRocket(e) {
-    console.log(e.keyCode);
-}
-
 // 偵測按下按鍵的行為
 document.getElementById('input-section').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') { ContentEnter(); }
