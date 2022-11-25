@@ -7,37 +7,20 @@ const textareas = [document.querySelector('#textarea-A'), document.querySelector
 // 現在輸入者的Index
 var indexNow = 1
 
-enterBtns[0].addEventListener('click', EnterAClick)
-enterBtns[1].addEventListener('click', EnterBClick)
-
-function EnterAClick() {
-    indexNow = 0
-    ContentEnter()
-}
-
-function EnterBClick() {
-    indexNow = 1
-    ContentEnter()
-}
-
 function ContentEnter() {
-
-    console.log(indexNow)
 
     // 如果未輸入
     if (textareas[indexNow].value === '') return;
 
     // 對話紀錄顯示
     const li = document.createElement('li');
-    li.appendChild(document.createTextNode(`${nameInputs[indexNow].value}：${nameInputs[indexNow].value}`));
+    li.appendChild(document.createTextNode(`${nameInputs[indexNow].value}：${textareas[indexNow].value}`));
     switch (indexNow) {
         case 0:
             li.setAttribute('class', 'msg-block msg-block-A')
-            console.log('A')
             break
         case 1:
             li.setAttribute('class', 'msg-block msg-block-B')
-            console.log('B')
             break
     }
     messages.appendChild(li);
@@ -48,43 +31,29 @@ function ContentEnter() {
     textareas[indexNow].value = '';
 }
 
-// on指令：當接收到server傳來的
-// const notifier = require('node-notifier')
-// const path = require('path')
-// const moment = require('moment')
-// const remote = require('electron').remote
+// 切換輸入視窗
+function SetInputIndex(index) {
+    indexNow = index;
 
-// const elNow = document.querySelector('.now-time')
-// const elAlarm = document.querySelector('.alarm-time')
-// elAlarm.addEventListener('change', onAlarmTextChange)
+    UpdateInputDiv();
 
-// let time = moment()
+    textareas[index].focus();
+}
 
-// let nowTime
-// let alarmTime
-
-// /** Set Time */
-// const now = moment(time).format('HH:mm:ss')
-// nowTime = now
-// elNow.innerText = now
-
-// const alarm = moment(time).add(5, 'seconds').format('HH:mm:ss')
-// alarmTime = alarm
-// elAlarm.value = alarm
-
-// timer()
-
-// /** Now Time */
-// function timer() {
-//     time = moment().format('HH:mm:ss')
-
-//     /** Set Now */
-//     nowTime = time
-//     elNow.innerText = time
-
-//     check()
-
-//     setTimeout(() => {
-//         timer()
-//     }, 1000)
-// }
+// 更新輸入視窗樣式
+function UpdateInputDiv() {
+    switch (indexNow) {
+        case 0:
+            textareas[0].removeAttribute('disabled');
+            textareas[1].setAttribute('disabled', '');
+            enterBtns[0].removeAttribute('disabled');
+            enterBtns[1].setAttribute('disabled', '');
+            break;
+        case 1:
+            textareas[1].removeAttribute('disabled');
+            textareas[0].setAttribute('disabled', '');
+            enterBtns[1].removeAttribute('disabled');
+            enterBtns[0].setAttribute('disabled', '');
+            break;
+    }
+}

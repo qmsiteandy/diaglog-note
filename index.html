@@ -27,23 +27,22 @@
 
     <!-- 輸入欄位 -->
     <div id="input-section">
-        <div class="input-div">
+        <div class="input-div" id="input-div-A" onclick="SetInputIndex(0)">
             <div class="name-div">
                 <h3>對話者：</h3>
                 <input type="text" class="name-input" id="name-A" value="A">
             </div>
             <textarea id="textarea-A" rows="6" cols="40" placeholder="請輸入內容..."></textarea>
-            <!-- <p class="enter-tip">按 Enter 輸入</p> -->
-            <button type="button" id="enter-A">Enter</button>
+            <button type="button" id="enter-A" onclick="ContentEnter()">Enter</button>
         </div>
-        <div class="input-div input-B">
+        <div class="input-div" id="input-div-B" onclick="SetInputIndex(1)">
             <div class="name-div">
                 <h3>對話者：</h3>
                 <input type="text" class="name-input" id="name-B" value="B">
             </div>
             <textarea id="textarea-B" rows="6" cols="40" placeholder="請輸入內容..."></textarea>
             <!-- <p class="enter-tip">按 Enter 輸入</p> -->
-            <button type="button" id="enter-B">Enter</button>
+            <button type="button" id="enter-B" onclick="ContentEnter()" >Enter</button>
         </div>
     </div>
     
