@@ -1,26 +1,51 @@
 const messages = document.querySelector('#messages')
 
-const enterA = document.querySelector('#enter-A')
-const nameA = document.querySelector('#name-A')
-const textareaA = document.querySelector('#textarea-A')
+const enterBtns = [document.querySelector('#enter-A'), document.querySelector('#enter-B')]
+const nameInputs = [document.querySelector('#name-A'), document.querySelector('#name-B')]
+const textareas = [document.querySelector('#textarea-A'), document.querySelector('#textarea-B')]
 
-enterA.addEventListener('click', ContentEnter)
+// 現在輸入者的Index
+var indexNow = 1
+
+enterBtns[0].addEventListener('click', EnterAClick)
+enterBtns[1].addEventListener('click', EnterBClick)
+
+function EnterAClick() {
+    indexNow = 0
+    ContentEnter()
+}
+
+function EnterBClick() {
+    indexNow = 1
+    ContentEnter()
+}
 
 function ContentEnter() {
 
+    console.log(indexNow)
+
     // 如果未輸入
-    if (textareaA.value === '') return;
+    if (textareas[indexNow].value === '') return;
 
     // 對話紀錄顯示
     const li = document.createElement('li');
-    li.appendChild(document.createTextNode(`${nameA.value}：${textareaA.value}`));
-    li.setAttribute('class', 'msg-block msg-block-B');
+    li.appendChild(document.createTextNode(`${nameInputs[indexNow].value}：${nameInputs[indexNow].value}`));
+    switch (indexNow) {
+        case 0:
+            li.setAttribute('class', 'msg-block msg-block-A')
+            console.log('A')
+            break
+        case 1:
+            li.setAttribute('class', 'msg-block msg-block-B')
+            console.log('B')
+            break
+    }
     messages.appendChild(li);
-
+    // 滾動至最新訊息
     messages.scrollTop = messages.scrollHeight;
 
     // 復原輸入框
-    textareaA.value = '';
+    textareas[indexNow].value = '';
 }
 
 // on指令：當接收到server傳來的
