@@ -7,6 +7,18 @@ const textareas = [document.querySelector('#textarea-A'), document.querySelector
 // 現在輸入者的Index
 var indexNow = 1
 
+function goRocket(e) {
+    console.log(e.keyCode);
+}
+
+// 偵測按下按鍵的行為
+document.getElementById('input-section').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { ContentEnter(); }
+    if (e.key === 'Tab') { if (indexNow === 0) SetInputIndex(1); else SetInputIndex(0); }
+    e.preventDefault();
+});
+
+
 function ContentEnter() {
 
     // 如果未輸入
