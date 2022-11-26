@@ -8,12 +8,11 @@ const textareas = [document.querySelector('#textarea-A'), document.querySelector
 var indexNow = 1
 
 // 偵測按下按鍵的行為
-document.getElementById('input-section').addEventListener('keydown', (e) => {
+document.getElementById('input-section').addEventListener('keyup', (e) => {
+    e.preventDefault();
     if (e.key === 'Enter') { ContentEnter(); }
     if (e.key === 'Tab') { if (indexNow === 0) SetInputIndex(1); else SetInputIndex(0); }
-    e.preventDefault();
 });
-
 
 function ContentEnter() {
 
@@ -45,7 +44,9 @@ function SetInputIndex(index) {
 
     UpdateInputDiv();
 
-    textareas[index].focus();
+    if (document.activeElement.classList.contains('name-input') === false) {
+        textareas[index].focus();
+    }
 }
 
 // 更新輸入視窗樣式
