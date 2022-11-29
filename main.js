@@ -4,12 +4,14 @@ const {
     BrowserWindow,
     Tray,
     Menu,
-    contextBridge
 } = require('electron')
 
 const path = require('path')
 const url = require('url')
 const ChildProcess = require('child_process')
+
+// 程式碼更新後自動reload
+require('electron-reload')(__dirname);
 
 let win
 
@@ -39,7 +41,7 @@ function createWindow() {
         maximizable: false,
         webPreferences: {
             nodeIntegration: false,
-            preload: path.join(__dirname + '/preload.js')
+            preload: path.join(__dirname + '/src/preload.js')
           }
     })
 

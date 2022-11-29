@@ -1,11 +1,14 @@
-const { contextBridge, ipcRenderer } = require('electron')
+const { contextBridge } = require('electron')
 
 contextBridge.exposeInMainWorld(
-    'bridgeAPI',
+    'csvAPI',
     {
-        ABC: () => {
-            console.log('1234');
+        CreateCSV: () => {
+            alert('1234');
         },
+        WriteCSV: () => {
+
+        }
     }
 )
 
