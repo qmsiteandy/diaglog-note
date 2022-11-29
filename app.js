@@ -5,7 +5,7 @@ const nameInputs = [document.querySelector('#name-A'), document.querySelector('#
 const textareas = [document.querySelector('#textarea-A'), document.querySelector('#textarea-B')]
 
 // 現在輸入者的Index
-var indexNow = 1
+let indexNow = 0
 
 // 偵測按下按鍵的行為
 document.getElementById('input-section').addEventListener('keyup', (e) => {

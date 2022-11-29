@@ -1,14 +1,14 @@
 var grunt = require('grunt');
 
 grunt.config.init({
-    pkg: grunt.file.readJSON('./AlarmClock/package.json'),
+    pkg: grunt.file.readJSON('./Diaglog-Note/package.json'),
     'create-windows-installer': {
         ia32: {
-            appDirectory: './AlarmClock/AlarmClock-win32-x64',
-            outputDirectory: './AlarmClock/installer64',
-            authors: 'Robby',
-            title: 'AlarmClock',
-            exe: 'AlarmClock.exe',
+            appDirectory: './Diaglog-Note/Diaglog-Note-win32-x64',
+            outputDirectory: './Diaglog-Note/installer64',
+            authors: 'Remon',
+            title: 'Diaglog-Note',
+            exe: 'Diaglog-Note.exe',
             description: 'alarm clock',
             noMsi: true,
             loadingGif: 'clock.ico',
