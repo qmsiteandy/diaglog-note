@@ -3,7 +3,8 @@ const {
     app,
     BrowserWindow,
     Tray,
-    Menu
+    Menu,
+    contextBridge
 } = require('electron')
 
 const path = require('path')
@@ -35,16 +36,24 @@ function createWindow() {
     win = new BrowserWindow({
         width: 600,
         height: 800,
-        maximizable: false
+        maximizable: false,
+        webPreferences: {
+            nodeIntegration: false,
+            preload: path.join(__dirname + '/preload.js')
+          }
     })
 
+    // 開發人員工具
     win.setAlwaysOnTop(true)
+
+    win.webContents.openDevTools({mode:'right'})
 
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
         slashes: true
     }))
+
 
     // Open DevTools.
     // win.webContents.openDevTools()
@@ -72,18 +81,18 @@ function createTray() {
     const iconPath = path.join(__dirname, 'clock.ico')
 
     const contextMenu = Menu.buildFromTemplate([{
-            label: 'AlarmClock',
-            click() {
-                win.show()
-            }
-        },
-        {
-            label: 'Quit',
-            click() {
-                win.removeAllListeners('close')
-                win.close()
-            }
+        label: 'AlarmClock',
+        click() {
+            win.show()
         }
+    },
+    {
+        label: 'Quit',
+        click() {
+            win.removeAllListeners('close')
+            win.close()
+        }
+    }
     ]);
 
     appIcon = new Tray(iconPath)
@@ -109,7 +118,7 @@ function handleSquirrelEvent() {
             spawnedProcess = ChildProcess.spawn(command, args, {
                 detached: true
             });
-        } catch (error) {}
+        } catch (error) { }
 
         return spawnedProcess;
     };
@@ -137,3 +146,4 @@ function handleSquirrelEvent() {
             return true;
     }
 }
+
