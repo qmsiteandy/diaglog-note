@@ -11,7 +11,7 @@ function WriteCSV(newData) {
             // 記錄新row
             console.log('File exists');
 
-            fs.appendFile(os.homedir() + '/Desktop/file.csv', newData + newLine, 'utf-8', function (err2) {
+            fs.appendFile(os.homedir() + '/Desktop/file.csv', '\ufeff' + newData, 'utf-8', function (err2) {
                 if (err2) throw err2;
                 console.log('The "data to append" was appended to file!');
             });
@@ -20,7 +20,7 @@ function WriteCSV(newData) {
             // 建立 file + fields + 新row
             console.log('New file, just writing headers');
 
-            fs.writeFile(os.homedir() + '/Desktop/file.csv', '\ufeff' + fields + newLine + newData + newLine, 'utf-8', function (err2) {
+            fs.writeFile(os.homedir() + '/Desktop/file.csv', '\ufeff' + fields + newLine + newData, 'utf-8', function (err2) {
                 if (err2) throw err2;
                 console.log('file saved');
             });

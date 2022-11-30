@@ -7,19 +7,27 @@ const textareas = [document.querySelector('#textarea-A'), document.querySelector
 // 現在輸入者的Index
 let indexNow = 0
 
-window.csvAPI.WriteCSV(['1', '2', '3']);
-
 // 偵測按下按鍵的行為
 document.getElementById('input-section').addEventListener('keyup', (e) => {
     e.preventDefault();
     if (e.key === 'Enter') { ContentEnter(); }
     if (e.key === 'Tab') { if (indexNow === 0) SetInputIndex(1); else SetInputIndex(0); }
 });
-
 function ContentEnter() {
 
-    // 如果未輸入
-    if (textareas[indexNow].value === '') return;
+    const msg = textareas[indexNow].value;
+    const name = nameInputs[indexNow].value;
+    const localTime = new Date().toLocaleString();
+
+    // 如果未輸入或內容只有\s \n
+    if (/\S/.test(msg) === false) {
+        textareas[indexNow].value = ''
+        return;
+    }
+
+    // 儲存對話至CSV
+    const toCsv = [name, localTime, msg]
+    window.csvAPI.WriteCSV(toCsv);
 
     // 對話紀錄顯示
     const li = document.createElement('li');
