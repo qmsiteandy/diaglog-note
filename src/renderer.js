@@ -15,7 +15,7 @@ document.getElementById('input-section').addEventListener('keyup', (e) => {
 });
 function ContentEnter() {
 
-    const msg = textareas[indexNow].value;
+    let msg = textareas[indexNow].value;
     const name = nameInputs[indexNow].value;
     const localTime = new Date().toLocaleString();
 
@@ -24,6 +24,9 @@ function ContentEnter() {
         textareas[indexNow].value = ''
         return;
     }
+
+    // 去除換行符號
+    msg = msg.replace(/\n/g, '');
 
     // 儲存對話至CSV
     const toCsv = [name, localTime, msg]
