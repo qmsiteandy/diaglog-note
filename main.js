@@ -40,15 +40,15 @@ function createWindow() {
         height: 800,
         maximizable: false,
         webPreferences: {
-            nodeIntegration: false,
-            preload: path.join(__dirname + '/src/preload.js')
-          }
+            preload: path.join(__dirname + '/src/preload.js'),
+            sandbox: false,
+        },
     })
 
     // 開發人員工具
     win.setAlwaysOnTop(true)
 
-    win.webContents.openDevTools({mode:'right'})
+    win.webContents.openDevTools({ mode: 'right' })
 
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
