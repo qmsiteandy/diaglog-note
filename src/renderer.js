@@ -29,8 +29,9 @@ function ContentEnter() {
     msg = msg.replace(/\n/g, '');
 
     // 儲存對話至CSV
-    const toCsv = [name, localTime, msg]
+    const toCsv = [name, localTime, msg];
     window.csvAPI.WriteCSV(toCsv);
+
 
     // 對話紀錄顯示
     const li = document.createElement('li');

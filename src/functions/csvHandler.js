@@ -12,7 +12,10 @@ function WriteCSV(newData) {
             console.log('File exists');
 
             fs.appendFile(os.homedir() + '/Desktop/file.csv', '\ufeff' + newData + newLine, 'utf-8', function (err2) {
-                if (err2) throw err2;
+                if (err2) {
+                    if (err2.toString().includes('EBUSY')) { alert('請確認 CSV 檔關閉，否則影響資料儲存'); }
+                    throw err2;
+                }
                 // console.log('The "data to append" was appended to file!');
             });
         } else {
