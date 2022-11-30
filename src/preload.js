@@ -1,11 +1,11 @@
 const { contextBridge } = require('electron');
 const { WriteCSV } = require('./functions/csvHandler');
 
-WriteCSV('123,456,789');
-
 contextBridge.exposeInMainWorld(
     'csvAPI',
     {
+        WriteCSV,
+
         // CreateCSV: () => {
         //     const db = new sqlite('./mytest.db');
         //     const sql = 'SELECT * FROM test';
@@ -13,7 +13,6 @@ contextBridge.exposeInMainWorld(
         //     let res = stmt.all();
         //     console.log(res);
         // },
-        // WriteCSV: WriteCSV()
     }
 )
 

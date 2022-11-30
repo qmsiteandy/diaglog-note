@@ -7,7 +7,7 @@ const textareas = [document.querySelector('#textarea-A'), document.querySelector
 // 現在輸入者的Index
 let indexNow = 0
 
-// window.csvAPI.WriteCSV();
+window.csvAPI.WriteCSV(['1', '2', '3']);
 
 // 偵測按下按鍵的行為
 document.getElementById('input-section').addEventListener('keyup', (e) => {
