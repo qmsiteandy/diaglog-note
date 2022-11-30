@@ -1,7 +1,7 @@
 var grunt = require('grunt');
 
 grunt.config.init({
-    pkg: grunt.file.readJSON('./Diaglog-Note/package.json'),
+    pkg: grunt.file.readJSON('./package.json'),
     'create-windows-installer': {
         ia32: {
             appDirectory: './Diaglog-Note/Diaglog-Note-win32-x64',

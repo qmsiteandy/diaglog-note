@@ -45,7 +45,7 @@ function createWindow() {
     // win.setAlwaysOnTop(true)
 
     // Open DevTools.
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
 
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
