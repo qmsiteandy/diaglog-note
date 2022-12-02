@@ -4,18 +4,6 @@ const enterBtns = [document.querySelector('#enter-A'), document.querySelector('#
 const nameInputs = [document.querySelector('#name-A'), document.querySelector('#name-B')]
 const textareas = [document.querySelector('#textarea-A'), document.querySelector('#textarea-B')]
 
-
-window.onerror = function (msg, url, line) {
-    console.log("Caught[via window.onerror]: '" + msg + "' from " + url + ":" + line);
-    return true; // same as preventDefault
-};
-
-window.addEventListener('error', function (evt) {
-    console.log("Caught[via 'error' event]:  '" + evt.message + "' from " + evt.filename + ":" + evt.lineno);
-    console.log(evt); // has srcElement / target / etc
-    evt.preventDefault();
-});
-
 // 現在輸入者的Index
 let indexNow = 0
 
@@ -42,11 +30,19 @@ async function ContentEnter() {
 
     // 儲存對話至CSV
     const toCsv = [name, localTime, msg];
-    try {
-        window.csvAPI.WriteCSV(toCsv);
-    } catch (e) {
-        console.log(e);
-    }
+    window.csvAPI.appendDataToFile('C:/Users/ht930/Desktop/file.csv', toCsv)
+    .catch(err => {
+        console.log(err)
+        if (err.stack.includes('EBUSY')) {
+            alert('請確認 CSV 檔關閉，否則影響資料儲存');
+        }
+    })
+    // try {
+    //     window.csvAPI.WriteCSV(toCsv);
+    // } catch (e) {
+    //     console.log(e);
+    // }
+    // os.homedir() + '/Desktop/file.csv
 
     // 對話紀錄顯示
     const li = document.createElement('li');
