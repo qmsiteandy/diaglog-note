@@ -25,11 +25,15 @@ async function appendDataToFile(path, data) {
             fs.writeFile(path, '\ufeff' + fields + newLine + data + newLine, 'utf-8', (err2) => {
                 // if (err2) throw err2;
             });
+
+            return false;
         }
     });
 
     console.log('append file')
     await fs.promises.appendFile(path, '\ufeff' + data + newLine, 'utf-8');
+
+    return true;
 }
 
 module.exports = { appendDataToFile }

@@ -28,39 +28,39 @@ async function ContentEnter() {
     // 去除換行符號
     msg = msg.replace(/\n/g, '');
 
+    let isAppendSuccess = true;
+
     // 儲存對話至CSV
     const toCsv = [name, localTime, msg];
-    window.csvAPI.appendDataToFile('./data/file.csv', toCsv)
+    await window.csvAPI.appendDataToFile('./data/file.csv', toCsv)
         .catch(err => {
             // console.log(err)
             if (err.stack.includes('EBUSY')) {
                 alert('請確認 CSV 檔關閉，否則影響資料儲存');
+                isAppendSuccess = false;
             }
         })
-    // try {
-    //     window.csvAPI.WriteCSV(toCsv);
-    // } catch (e) {
-    //     console.log(e);
-    // }
-    // os.homedir() + '/Desktop/file.csv
 
-    // 對話紀錄顯示
-    const li = document.createElement('li');
-    li.appendChild(document.createTextNode(`${nameInputs[indexNow].value}：${textareas[indexNow].value}`));
-    switch (indexNow) {
-        case 0:
-            li.setAttribute('class', 'msg-block msg-block-A')
-            break
-        case 1:
-            li.setAttribute('class', 'msg-block msg-block-B')
-            break
+    if (isAppendSuccess) {
+        // 對話紀錄顯示
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(`${nameInputs[indexNow].value}：${textareas[indexNow].value}`));
+        switch (indexNow) {
+            case 0:
+                li.setAttribute('class', 'msg-block msg-block-A')
+                break
+            case 1:
+                li.setAttribute('class', 'msg-block msg-block-B')
+                break
+        }
+        messages.appendChild(li);
+        // 滾動至最新訊息
+        messages.scrollTop = messages.scrollHeight;
+
+        // 復原輸入框
+        textareas[indexNow].value = '';
     }
-    messages.appendChild(li);
-    // 滾動至最新訊息
-    messages.scrollTop = messages.scrollHeight;
 
-    // 復原輸入框
-    textareas[indexNow].value = '';
 }
 
 // 切換輸入視窗
