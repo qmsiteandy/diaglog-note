@@ -3,6 +3,7 @@
 node_modules
 Diaglog-Note-win32-x64
 installer64
+data
 
 # File
 package-lock.json

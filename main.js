@@ -11,7 +11,7 @@ const url = require('url')
 const ChildProcess = require('child_process')
 
 // 程式碼更新後自動reload
-require('electron-reload')(__dirname);
+require('electron-reload')(path.join(__dirname, '/src'));
 
 let win
 

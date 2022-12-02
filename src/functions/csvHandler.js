@@ -5,17 +5,17 @@ var newLine = '\r\n';
 var fields = ['名稱', '時間', '內容'];
 
 
-WriteCSV(os.homedir() + '/Desktop/file.csv', '1,2,3')
-    .catch(err => {
-        // console.log(err)
-        if (err.stack.includes('EBUSY')) {
-            alert('請確認 CSV 檔關閉，否則影響資料儲存');
-        }
-    })
+// appendDataToFile(os.homedir() + '/Desktop/file.csv', '1,2,3')
+//     .catch(err => {
+//         // console.log(err)
+//         if (err.stack.includes('EBUSY')) {
+//             alert('請確認 CSV 檔關閉，否則影響資料儲存');
+//         }
+//     })
 
-async function WriteCSV(path, data) {
+async function appendDataToFile(path, data) {
 
-    console.log(path)
+    // console.log(path)
     fs.stat(path, function (err, stat) {
         if (err != null) {
 
@@ -25,12 +25,11 @@ async function WriteCSV(path, data) {
             fs.writeFile(path, '\ufeff' + fields + newLine + data + newLine, 'utf-8', (err2) => {
                 // if (err2) throw err2;
             });
-            console.log('write file')
         }
     });
 
     console.log('append file')
-    await fs.promises.appendFile(os.homedir() + '/Desktop/file.csv', '\ufeff' + ['4,5,6'] + newLine, 'utf-8');
+    await fs.promises.appendFile(path, '\ufeff' + data + newLine, 'utf-8');
 }
 
-module.exports = { WriteCSV }
+module.exports = { appendDataToFile }

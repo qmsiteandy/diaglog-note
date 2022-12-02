@@ -30,13 +30,13 @@ async function ContentEnter() {
 
     // 儲存對話至CSV
     const toCsv = [name, localTime, msg];
-    window.csvAPI.appendDataToFile('C:/Users/ht930/Desktop/file.csv', toCsv)
-    .catch(err => {
-        console.log(err)
-        if (err.stack.includes('EBUSY')) {
-            alert('請確認 CSV 檔關閉，否則影響資料儲存');
-        }
-    })
+    window.csvAPI.appendDataToFile('./data/file.csv', toCsv)
+        .catch(err => {
+            // console.log(err)
+            if (err.stack.includes('EBUSY')) {
+                alert('請確認 CSV 檔關閉，否則影響資料儲存');
+            }
+        })
     // try {
     //     window.csvAPI.WriteCSV(toCsv);
     // } catch (e) {
