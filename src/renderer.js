@@ -4,6 +4,18 @@ const enterBtns = [document.querySelector('#enter-A'), document.querySelector('#
 const nameInputs = [document.querySelector('#name-A'), document.querySelector('#name-B')]
 const textareas = [document.querySelector('#textarea-A'), document.querySelector('#textarea-B')]
 
+
+window.onerror = function (msg, url, line) {
+    console.log("Caught[via window.onerror]: '" + msg + "' from " + url + ":" + line);
+    return true; // same as preventDefault
+};
+
+window.addEventListener('error', function (evt) {
+    console.log("Caught[via 'error' event]:  '" + evt.message + "' from " + evt.filename + ":" + evt.lineno);
+    console.log(evt); // has srcElement / target / etc
+    evt.preventDefault();
+});
+
 // 現在輸入者的Index
 let indexNow = 0
 
@@ -13,7 +25,7 @@ document.getElementById('input-section').addEventListener('keyup', (e) => {
     if (e.key === 'Enter') { ContentEnter(); }
     if (e.key === 'Tab') { if (indexNow === 0) SetInputIndex(1); else SetInputIndex(0); }
 });
-function ContentEnter() {
+async function ContentEnter() {
 
     let msg = textareas[indexNow].value;
     const name = nameInputs[indexNow].value;
@@ -30,8 +42,11 @@ function ContentEnter() {
 
     // 儲存對話至CSV
     const toCsv = [name, localTime, msg];
-    window.csvAPI.WriteCSV(toCsv);
-
+    try {
+        window.csvAPI.WriteCSV(toCsv);
+    } catch (e) {
+        console.log(e);
+    }
 
     // 對話紀錄顯示
     const li = document.createElement('li');
