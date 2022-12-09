@@ -5,8 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . AlarmClock --out AlarmClock --overwrite --platform=win32 --arch=x64 --icon=clock.ico --prune=true --squirrel-install --ignore=node_modules/electron-* --electron-version=1.7.9 --ignore=AlarmClock-win32-x64 --version-string.CompanyName=Robby --version-string.ProductName=AlarmClock",
-    "pack": "grunt"
+    "build": "electron-packager . Diaglog-Note --out Diaglog-Note --overwrite --platform=win32 --arch=x64 --icon=clock.ico --prune=true --squirrel-install --ignore=node_modules/electron-* --electron-version=1.7.9 --ignore=Diaglog-Note-win32-x64 --version-string.CompanyName=Robby --version-string.ProductName=Diaglog-Note",
+    "pack": "electron-builder --dir",
+    "pack-dist": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,30 @@
   "bugs": {
     "url": "https://github.com/explooosion/electron-alarm-clock/issues"
   },
+  "build": {
+    "appId": "com.example.app",
+    "productName": "Diaglog-Note",
+    "directories": {
+      "output": "pack"
+    },
+    "files": [
+      "**/*",
+      "!.vscode",
+      "build/"
+    ],
+    "asar": false,
+    "win": {
+      "icon": "clock.ico"
+    },
+    "mac": {
+      "icon": "clock.ico"
+    }
+  },
   "homepage": "https://github.com/explooosion/electron-alarm-clock#readme",
   "devDependencies": {
     "babel-eslint": "^8.0.1",
-    "electron": "^1.8.8",
+    "electron": "^21.3.3",
+    "electron-builder": "^23.6.0",
     "electron-packager": "^11.1.0",
     "eslint": "^4.11.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -32,7 +53,9 @@
     "grunt-electron-installer": "^2.1.0"
   },
   "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
     "moment": "^2.21.0",
-    "node-notifier": "^5.2.1"
+    "node-notifier": "^5.2.1",
+    "sqlite3": "^5.1.2"
   }
 }

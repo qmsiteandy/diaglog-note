@@ -3,18 +3,17 @@ const {
     app,
     BrowserWindow,
     Tray,
-    Menu
+    Menu,
 } = require('electron')
 
 const path = require('path')
 const url = require('url')
 const ChildProcess = require('child_process')
 
-let win
+// 程式碼更新後自動reload
+require('electron-reload')(path.join(__dirname, '/src'));
 
-if (handleSquirrelEvent()) {
-    return;
-}
+let win
 
 app.on('ready', createWindow)
 
@@ -35,105 +34,64 @@ function createWindow() {
     win = new BrowserWindow({
         width: 600,
         height: 800,
-        maximizable: false
+        maximizable: false,
+        webPreferences: {
+            preload: path.join(__dirname, '/src/preload.js'),
+            sandbox: false,
+        },
     })
 
-    win.setAlwaysOnTop(true)
+    // 持續顯示在最上層
+    // win.setAlwaysOnTop(true)
+
+    // Open DevTools.
+    win.webContents.openDevTools()
 
     win.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
+        pathname: path.join(__dirname, '/src/index.html'),
         protocol: 'file:',
         slashes: true
     }))
-
-    // Open DevTools.
-    // win.webContents.openDevTools()
 
     // When Window Close.
     win.on('closed', () => {
         win = null
     })
 
-    // When Window Minimize
-    win.on('minimize', () => {
-        win.hide()
-    })
+    // // When Window Minimize
+    // win.on('minimize', () => {
+    //     win.hide()
+    // })
 
-    win.on('restore', () => {
-        console.log('restore')
-    })
+    // win.on('restore', () => {
+    //     console.log('restore')
+    // })
 
     // Create Tray
-    createTray()
+    // createTray()
 }
 
-function createTray() {
-    let appIcon = null
-    const iconPath = path.join(__dirname, 'clock.ico')
+// function createTray() {
+//     let appIcon = null
+//     const iconPath = path.join(__dirname, 'clock.ico')
 
-    const contextMenu = Menu.buildFromTemplate([{
-            label: 'AlarmClock',
-            click() {
-                win.show()
-            }
-        },
-        {
-            label: 'Quit',
-            click() {
-                win.removeAllListeners('close')
-                win.close()
-            }
-        }
-    ]);
+//     const contextMenu = Menu.buildFromTemplate([{
+//         label: 'Diaglog-Note',
+//         click() {
+//             win.show()
+//         }
+//     },
+//     {
+//         label: 'Quit',
+//         click() {
+//             win.removeAllListeners('close')
+//             win.close()
+//         }
+//     }
+//     ]);
 
-    appIcon = new Tray(iconPath)
-    appIcon.setToolTip('Alarm Clock')
-    appIcon.setContextMenu(contextMenu)
+//     appIcon = new Tray(iconPath)
+//     appIcon.setToolTip('Diaglog-Note')
+//     appIcon.setContextMenu(contextMenu)
 
-}
-
-function handleSquirrelEvent() {
-    if (process.argv.length === 1) {
-        return false;
-    }
-
-    const appFolder = path.resolve(process.execPath, '..');
-    const rootAtomFolder = path.resolve(appFolder, '..');
-    const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));
-    const exeName = path.basename(process.execPath);
-
-    const spawn = function (command, args) {
-        let spawnedProcess;
-
-        try {
-            spawnedProcess = ChildProcess.spawn(command, args, {
-                detached: true
-            });
-        } catch (error) {}
-
-        return spawnedProcess;
-    };
-
-    const spawnUpdate = function (args) {
-        return spawn(updateDotExe, args);
-    };
-
-    const squirrelEvent = process.argv[1];
-    switch (squirrelEvent) {
-        case '--squirrel-install':
-        case '--squirrel-updated':
-            spawnUpdate(['--createShortcut', exeName]);
-            setTimeout(app.quit, 1000);
-            return true;
-
-        case '--squirrel-uninstall':
-
-            spawnUpdate(['--removeShortcut', exeName]);
-            setTimeout(app.quit, 1000);
-            return true;
-
-        case '--squirrel-obsolete':
-            app.quit();
-            return true;
-    }
-}
+// }
