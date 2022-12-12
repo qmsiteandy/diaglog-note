@@ -1,10 +1,11 @@
 const { contextBridge } = require('electron');
-const { appendDataToFile } = require('./functions/csvHandler');
+const csvHandler = require('./functions/csvHandler');
 
 contextBridge.exposeInMainWorld(
     'csvAPI',
     {
-        appendDataToFile,
+        createFile: csvHandler.createFile,
+        appendDataToFile: csvHandler.appendDataToFile,
 
         // CreateCSV: () => {
         //     const db = new sqlite('./mytest.db');

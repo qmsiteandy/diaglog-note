@@ -48,7 +48,7 @@ function createWindow() {
     win.webContents.openDevTools()
 
     win.loadURL(url.format({
-        pathname: path.join(__dirname, '/src/index.html'),
+        pathname: path.join(__dirname, '/src/pages/homePage.html'),
         protocol: 'file:',
         slashes: true
     }))

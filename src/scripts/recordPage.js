@@ -13,11 +13,12 @@ document.getElementById('input-section').addEventListener('keyup', (e) => {
     if (e.key === 'Enter') { ContentEnter(); }
     if (e.key === 'Tab') { if (indexNow === 0) SetInputIndex(1); else SetInputIndex(0); }
 });
+
 async function ContentEnter() {
 
     let msg = textareas[indexNow].value;
     const name = nameInputs[indexNow].value;
-    const localTime = new Date().toLocaleString();
+    const localTime = new Date().getHours + ':' + new Date().getMinutes;
 
     // 如果未輸入或內容只有\s \n
     if (/\S/.test(msg) === false) {
