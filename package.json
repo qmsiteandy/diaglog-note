@@ -1,61 +1,62 @@
 {
-  "name": "Diaglog-Note",
-  "version": "1.0.0",
-  "description": "Note for Diaglog",
-  "main": "main.js",
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@electron/remote": "^2.0.9",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "electron-is-dev": "^2.0.0",
+    "fs": "^0.0.1-security",
+    "os": "^0.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.5",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "electron-builder": "^20.28.4",
+    "electron-reload": "^2.0.0-alpha.1"
+  },
+  "main": "public/main.js",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-packager . Diaglog-Note --out Diaglog-Note --overwrite --platform=win32 --arch=x64 --icon=clock.ico --prune=true --squirrel-install --ignore=node_modules/electron-* --electron-version=1.7.9 --ignore=Diaglog-Note-win32-x64 --version-string.CompanyName=Robby --version-string.ProductName=Diaglog-Note",
-    "pack": "electron-builder --dir",
-    "pack-dist": "electron-builder"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/explooosion/electron-alarm-clock"
-  },
-  "keywords": [],
-  "author": "Remon <ht93084@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/explooosion/electron-alarm-clock/issues"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron:serve": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn electron:start\"",
+    "electron-start": "wait-on tcp:3000 && APP_DEV=true electron .",
+    "electron-build": "npm run build && node build.js"
   },
   "build": {
-    "appId": "com.example.app",
-    "productName": "Diaglog-Note",
-    "directories": {
-      "output": "pack"
-    },
+    "appId": "com.example.electron-cra",
     "files": [
-      "**/*",
-      "!.vscode",
-      "build/"
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json"
     ],
-    "asar": false,
-    "win": {
-      "icon": "clock.ico"
-    },
-    "mac": {
-      "icon": "clock.ico"
+    "directories": {
+      "buildResources": "assets"
     }
   },
-  "homepage": "https://github.com/explooosion/electron-alarm-clock#readme",
-  "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "electron": "^21.3.3",
-    "electron-builder": "^23.6.0",
-    "electron-packager": "^11.1.0",
-    "eslint": "^4.11.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-formatting": "0.0.4",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-mocha": "^4.11.0",
-    "grunt": "^1.0.2",
-    "grunt-electron-installer": "^2.1.0"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "dependencies": {
-    "electron-reload": "^2.0.0-alpha.1",
-    "moment": "^2.21.0",
-    "node-notifier": "^5.2.1",
-    "sqlite3": "^5.1.2"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
